@@ -1,0 +1,9 @@
+# Docker specific files
+.dockerignore
+Dockerfile
+
+# Unnecessary for production
+test_*
+*.md
+*.development
+.pre-commit-config.yaml
