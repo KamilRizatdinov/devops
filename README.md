@@ -67,6 +67,17 @@ To get a local copy up and running follow these simple example steps.
     docker run -p <local port number>:8000 -d rizatdinov/devops_python_app
     ```
 
+## Testing
+1. Make sure you are inside devops/python_app
+   ```sh
+   cd devops/python_app
+   ```
+
+2. Run tests
+   ```sh
+   pytest .
+   ```
+
 ## Usage
 
 After successfull instalation, you should be able to open application on localhost under port number you specified (e.g. `http://localhost:<port number>`). Enjoy it!
