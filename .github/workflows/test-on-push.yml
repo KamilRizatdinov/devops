@@ -1,0 +1,25 @@
+name: test-on-push
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./python_app
+
+    steps:
+      - name: Fetch repository
+        uses: actions/checkout@main
+
+      - name: Set up python3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install workflow dependencies
+        run: pip install -r requirements.txt.development
+        working-directory: ${{env.working-directory}}
+
+
+      - name: Run tests
+        run: pytest
+        working-directory: ${{env.working-directory}}
