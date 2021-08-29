@@ -24,8 +24,10 @@ pipeline {
         stage('build') {
           steps {
             dir(path: env.BUILD_ID) {
+              sh 'rc-update add docker boot'
+              sh 'service docker start'
               script {
-                docker.build registry + ":$env.BUILD_ID"
+                sh 'docker build $registry:$env.BUILD_ID'
               }
             }
           }
