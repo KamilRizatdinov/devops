@@ -9,12 +9,13 @@ pipeline {
     stages {
         stage('test') {
             steps {
+              dir(path: env.BUILD_ID) {
                 sh 'apk add --no-cache git'
-                sh 'rm -rf devops'
                 sh 'git clone https://github.com/KamilRizatdinov/devops.git'
                 dir('devops/python_app') {
                   sh 'ls'
                 }
+              }
             }
         }
     }
