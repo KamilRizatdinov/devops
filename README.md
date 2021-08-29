@@ -1,3 +1,5 @@
+![Test workflow](https://github.com/KamilRizatdinov/devops/actions/workflows/main.yml/badge.svg)
+
 # Innopolis University DevOps course repository
 
 ## About The Project
