@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('test') {
             steps {
+                sh 'apk add --no-cache git'
                 sh 'git pull https://github.com/KamilRizatdinov/devops.git'
                 sh 'cd devops'
                 sh 'pip install -r requirements.txt.development'
