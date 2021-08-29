@@ -12,9 +12,8 @@ pipeline {
               dir(path: env.BUILD_ID) {
                 sh 'apk add --no-cache git'
                 sh 'git clone https://github.com/KamilRizatdinov/devops.git'
-                dir('devops/python_app') {
-                  sh 'ls'
-                }
+                sh 'cd devops/python_app && ls'
+                sh 'ls'
               }
             }
         }
