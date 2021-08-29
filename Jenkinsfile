@@ -24,10 +24,10 @@ pipeline {
         stage('build') {
           steps {
             dir(path: env.BUILD_ID) {
+              sh 'apk add docker'
               sh 'rc-update add docker boot'
-              sh 'service docker start'
               script {
-                sh 'docker build $registry:$env.BUILD_ID'
+                sh 'cd devops/python_app && docker build -t $registry:$env.BUILD_ID .'
               }
             }
           }
