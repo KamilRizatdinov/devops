@@ -17,5 +17,12 @@ pipeline {
               }
             }
         }
+        stage('build') {
+          steps {
+            dir(path: env.BUILD_ID) {
+              sh 'ls'
+            }
+          }
+        }
     }
 }
