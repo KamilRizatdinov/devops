@@ -10,7 +10,7 @@ pipeline {
         stage('test') {
             steps {
               dir(path: env.BUILD_ID) {
-                sh 'apk add --no-cache git'
+                sh 'apk add --no-cache git build-base'
                 sh 'git clone https://github.com/KamilRizatdinov/devops.git'
                 sh 'cd devops/python_app && pip install -r requirements.txt.development'
                 sh 'cd devops/python_app && pytest .'
