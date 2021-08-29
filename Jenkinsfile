@@ -1,4 +1,8 @@
 pipeline {
+    environment {
+      registry = 'rizatdinov/python_app'
+    }
+
     agent {
       docker {
         image 'python:3.7-alpine'
@@ -20,7 +24,9 @@ pipeline {
         stage('build') {
           steps {
             dir(path: env.BUILD_ID) {
-              sh 'ls'
+              script {
+                docker.build registry + ":$env.BUILD_ID"
+              }
             }
           }
         }
