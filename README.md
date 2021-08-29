@@ -1,5 +1,7 @@
 # Innopolis University DevOps course repository
 
+![Badge](https://github.com/KamilRizatdinov/devops/blob/main/.github/workflows/main.yml/badge.svg)
+
 ## About The Project
 
 This is simple Web application which shows current time in Moscow.
