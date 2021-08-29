@@ -1,0 +1,54 @@
+name: Main workflow
+
+on:
+  push:
+    branches:
+      - "main"
+
+env:
+  working-directory: ./python_app
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Fetch repository
+        uses: actions/checkout@main
+
+      - name: Set up python3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Cache python dependencies
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-python-dependencies
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('requirements.txt.development') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install workflow dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade-strategy eager -r requirements.txt.development
+        working-directory: ${{env.working-directory}}
+
+
+      - name: Run tests
+        run: pytest
+        working-directory: ${{env.working-directory}}
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "test"
+        run: echo ${{env.working-directory}}
