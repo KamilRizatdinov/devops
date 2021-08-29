@@ -11,9 +11,8 @@ pipeline {
             steps {
                 sh 'apk add --no-cache git'
                 sh 'git clone https://github.com/KamilRizatdinov/devops.git'
-                sh 'cd devops'
+                sh 'cd devops/python_app'
                 sh 'pip install -r requirements.txt.development'
-                sh 'cd python_app'
                 sh 'pytest .'
             }
         }
