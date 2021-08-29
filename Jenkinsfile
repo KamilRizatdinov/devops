@@ -14,8 +14,6 @@ pipeline {
                 sh 'git clone https://github.com/KamilRizatdinov/devops.git'
                 dir('devops/python_app') {
                   sh 'ls'
-                  sh 'pip install -r requirements.txt.development'
-                  sh 'pytest .'
                 }
             }
         }
