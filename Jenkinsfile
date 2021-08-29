@@ -24,7 +24,7 @@ pipeline {
         stage('build') {
           steps {
             dir(path: env.BUILD_ID) {
-              sh 'apk add docker'
+              sh 'apk add docker openrc'
               sh 'rc-update add docker boot && service docker start'
               sh "cd devops/python_app && docker build -t ${registry}:${env.BUILD_ID} ."
             }
