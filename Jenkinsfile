@@ -12,10 +12,11 @@ pipeline {
                 sh 'apk add --no-cache git'
                 sh 'rm -rf devops'
                 sh 'git clone https://github.com/KamilRizatdinov/devops.git'
-                sh 'cd devops/python_app'
-                sh 'ls'
-                // sh 'pip install -r requirements.txt.development'
-                // sh 'pytest .'
+                dir('devops/python_app') {
+                  sh 'ls'
+                  sh 'pip install -r requirements.txt.development'
+                  sh 'pytest .'
+                }
             }
         }
     }
