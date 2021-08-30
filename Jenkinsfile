@@ -28,7 +28,7 @@ pipeline {
       steps {
         withPythonEnv('python') {
           sh 'ls'
-          sh 'pip install -r $workdir/requirements.development.txt'
+          sh 'pip install -r $workdir/requirements.txt.development'
         }
       }
     }
