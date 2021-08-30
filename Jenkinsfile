@@ -49,10 +49,12 @@ pipeline {
       }
     }
 
-    stage('Building image') {
+    stage('Build docker image') {
       steps{
-        script {
-          docker.build registry + ":$BUILD_NUMBER"
+        dir($workdir) {
+          script {
+            docker.build registry + ":$BUILD_NUMBER"
+          }
         }
       }
     }
