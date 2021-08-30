@@ -42,8 +42,10 @@ pipeline {
     }
 
     stage('Check with black') {
-      withPythonEnv('python') {
-        sh 'cd $workdir && black --check --verbose .'
+      steps {
+        withPythonEnv('python') {
+          sh 'cd $workdir && black --check --verbose .'
+        }
       }
     }
   }
