@@ -20,7 +20,6 @@ pipeline {
 
     stage('Install alpine dependencies') {
       steps {
-        sh 'ls'
         sh 'apk add gcc docker'
       }
     }
@@ -28,6 +27,7 @@ pipeline {
     stage('Install python dependencies') {
       steps {
         withPythonEnv('python') {
+          sh 'ls'
           sh 'pip install -r $workdir/requirements.development.txt'
         }
       }
@@ -36,8 +36,14 @@ pipeline {
     stage('Run python tests') {
       steps {
         withPythonEnv('python') {
-          sh 'pytest $workdir/.'
+          sh 'cd $workdir && pytest .'
         }
+      }
+    }
+
+    stage('Check with black') {
+      withPythonEnv('python') {
+        sh 'cd $workdir && black --check --verbose .'
       }
     }
   }
