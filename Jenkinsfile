@@ -20,7 +20,7 @@ pipeline {
 
     stage('Install alpine dependencies') {
       steps {
-        sh 'apk add gcc docker'
+        sh 'apk add gcc musl-dev docker'
       }
     }
 
