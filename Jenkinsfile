@@ -8,6 +8,8 @@ pipeline {
 
   environment {
     registry = 'rizatdinov/python_app'
+    registryCredential = 'dockerhubCredentials'
+    dockerImage = ''
     workdir = 'python_app'
   }
 
@@ -53,7 +55,17 @@ pipeline {
       steps{
         dir(path: workdir) {
           script {
-            docker.build registry + ":$BUILD_NUMBER"
+            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          }
+        }
+      }
+    }
+
+    stage('Deploy docker image') {
+      steps{
+        script {
+          docker.withRegistry('', registryCredential) {
+            dockerImage.push()
           }
         }
       }
