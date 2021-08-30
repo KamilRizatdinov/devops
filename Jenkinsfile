@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'python:3.7-alpine'
-      args '-u 0'
+      args '-u 0 -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
 
