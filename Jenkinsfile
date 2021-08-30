@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'python:3.7-alpine'
-      args '-u 0 -v /var/run/docker.sock:/var/run/docker.sock'
+      args '-u 0 -v /var/run/docker.sock:/var/run/docker.sock -v -v $HOME/.cache:/root/.cache'
     }
   }
 
@@ -29,7 +29,6 @@ pipeline {
     stage('Install python dependencies') {
       steps {
         withPythonEnv('python') {
-          sh 'ls'
           sh 'pip install -r $workdir/requirements.txt.development'
         }
       }
@@ -55,7 +54,7 @@ pipeline {
       steps{
         dir(path: workdir) {
           script {
-            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            dockerImage = docker.build registry + ":jenkins-$BUILD_NUMBER"
           }
         }
       }
