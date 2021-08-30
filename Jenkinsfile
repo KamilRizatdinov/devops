@@ -8,7 +8,7 @@ pipeline {
 
   environment {
     registry = 'rizatdinov/python_app'
-    workdir = 'devops/python_app'
+    workdir = 'python_app'
   }
 
   stages {
@@ -28,7 +28,15 @@ pipeline {
     stage('Install python dependencies') {
       steps {
         withPythonEnv('python') {
-          sh 'pip install -r $app_dir/requirements.development.txt'
+          sh 'pip install -r $workdir/requirements.development.txt'
+        }
+      }
+    }
+
+    stage('Run python tests') {
+      steps {
+        withPythonEnv('python') {
+          sh 'pytest $workdir/.'
         }
       }
     }
