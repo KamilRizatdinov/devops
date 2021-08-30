@@ -51,7 +51,7 @@ pipeline {
 
     stage('Build docker image') {
       steps{
-        dir($workdir) {
+        dir(path: workdir) {
           script {
             docker.build registry + ":$BUILD_NUMBER"
           }
