@@ -1,0 +1,40 @@
+# encoding: utf-8
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# References:
+# * https://medium.com/@JohnFoderaro/how-to-set-up-a-local-linux-environment-with-vagrant-163f0ba4da77
+# * https://craigforrester.com/posts/vagrant-getting-started-vagrantfile/
+# * https://www.vagrantup.com/docs/providers/virtualbox/configuration
+
+# Box / OS
+VAGRANT_BOX = 'ubuntu/trusty64'
+
+# VM configuration parameteres
+VM_NAME = 'new-vm'
+VM_MEMORY = 2048
+VM_GUI = false
+VM_CPUS = 1
+
+# # VM Port — uncomment this to use NAT instead of DHCP
+# VM_PORT = 8080
+
+Vagrant.configure(2) do |config|
+
+  # Vagrant box from Hashicorp
+  config.vm.box = VAGRANT_BOX
+
+  # Actual machine name
+  config.vm.hostname = VM_NAME
+
+  # Set VM name in Virtualbox
+  config.vm.provider "virtualbox" do |v|
+    v.name = VM_NAME
+    v.memory = VM_MEMORY
+    v.gui = VM_GUI
+    v.cpus = VM_CPUS
+  end
+
+  #DHCP — comment this out if planning on using NAT instead
+  config.vm.network "private_network", type: "dhcp"
+end
