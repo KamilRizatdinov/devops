@@ -131,3 +131,5 @@ dmypy.json
 .DS_Store/
 jenkins/
 vagrant/.vagrant/
+terraform/.terraform/
+terraform/virtualbox.box
