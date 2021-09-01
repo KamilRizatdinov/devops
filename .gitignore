@@ -132,5 +132,5 @@ dmypy.json
 jenkins/
 *.vagrant/
 *.terraform/
-terraform/virtualbox.box
+*.box
 *.tfstate*
