@@ -1,1 +1,10 @@
+galaxy_info:
+  role_name: python_app
+  author: Kamil Rizatdnov
+  description: Simple role for application deployment with docker-compose
+  license: license (MIT)
+  min_ansible_version: 2.9
+  platforms:
+    - name: Debian/Ubuntu
+
 dependencies: [docker]

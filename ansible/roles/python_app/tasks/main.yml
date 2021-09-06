@@ -4,6 +4,7 @@
   file:
     path: "{{ python_app_workdir }}"
     state: directory
+    mode: '0755'
 
 - name: Copy docker-compose file to virtual machine
   template:
