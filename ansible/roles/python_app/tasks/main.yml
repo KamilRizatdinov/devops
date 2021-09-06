@@ -1,0 +1,19 @@
+---
+# References: https://docs.ansible.com/ansible/2.9/modules/docker_compose_module.html
+- name: Create application folder
+  file:
+    path: "{{ python_app_workdir }}"
+    state: directory
+
+- name: Copy docker-compose file to virtual machine
+  template:
+    src: docker-compose.yaml.j2
+    dest: "{{ python_app_workdir }}/docker-compose.yaml"
+    mode: '0700'
+
+- name: Deploy application with docker-compose
+  community.docker.docker_compose:
+    build: no
+    pull: yes
+    state: present
+    project_src: "{{ python_app_workdir }}"

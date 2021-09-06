@@ -1,0 +1,8 @@
+---
+# Workdir
+python_app_workdir: /opt/python_app
+
+# Docker container specific variables
+python_app_docker_image: rizatdinov/python_app
+python_app_docker_tag: gh-actions-317ca9e71bcd1dafc3ad75d45a9eb4d299d44903
+python_app_local_port: 8000

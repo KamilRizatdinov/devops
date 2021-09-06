@@ -3,6 +3,6 @@ version: '3'
 
 services:
   python_app:
-    image: rizatdinov/devops_python_app:latest
+    image: rizatdinov/python_app:gh-actions-317ca9e71bcd1dafc3ad75d45a9eb4d299d44903
     ports:
       - "8000:8000"

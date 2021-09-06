@@ -57,8 +57,6 @@
     enabled: true
   ignore_errors: "{{ ansible_check_mode }}"
 
-- name: Install docker-compose
-  get_url:
-    url: "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-Linux-x86_64"
-    dest: "/usr/local/bin/docker-compose"
-    mode: +x
+- include_tasks: docker-compose.yml
+
+- include_tasks: docker-python-deps.yml
