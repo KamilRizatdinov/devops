@@ -15,8 +15,14 @@ VM_NAME = 'test-machine'
 VM_MEMORY = 2048
 VM_GUI = true
 VM_CPUS = 2
-SSH_FORWARD_X11 = true
-SSH_FORWARD_AGENT = true
+
+HOST_PORT_APP = 8001
+HOST_PORT_GRAPHANA = 3001
+HOST_PORT_PROMTAIL = 9081
+
+GUEST_PORT_APP = 8000
+GUEST_PORT_GRAPHANA = 3000
+GUEST_PORT_PROMTAIL = 9080
 
 Vagrant.require_version ">= 1.8.0"
 
@@ -24,9 +30,10 @@ Vagrant.configure(2) do |config|
   config.vm.box = VAGRANT_BOX
   config.vm.hostname = VM_NAME
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.network "forwarded_port", guest: 8000, host: 80
-  config.ssh.forward_x11 = SSH_FORWARD_X11
-  config.ssh.forward_agent = SSH_FORWARD_AGENT
+
+  config.vm.network "forwarded_port", guest: GUEST_PORT_APP, host: HOST_PORT_APP
+  config.vm.network "forwarded_port", guest: GUEST_PORT_GRAPHANA, host: HOST_PORT_GRAPHANA
+  config.vm.network "forwarded_port", guest: GUEST_PORT_PROMTAIL, host: HOST_PORT_PROMTAIL
 
   config.vm.provider "virtualbox" do |v|
           v.memory = VM_MEMORY

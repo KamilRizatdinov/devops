@@ -1,0 +1,23 @@
+---
+# Docker comunity edition
+docker_package: "docker-ce"
+
+# Docker repository URL
+docker_repo_url: https://download.docker.com/linux
+
+# Used for Debian/Ubuntu
+docker_apt_release_channel: stable
+docker_apt_arch: amd64
+docker_apt_repository: "deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"
+docker_apt_ignore_key_error: true
+docker_apt_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
+
+# Docker daemon options as a dict
+# Reference: https://ops.tips/blog/docker-ansible-role/
+docker_daemon_options: {
+  "experimental": true, # allows to build images with --squash
+  "icc": false, # disable inter-container communication since we dont need it
+  "max-concurrent-downloads": 30,
+  "max-concurrent-uploads": 30,
+  # "metrics-addr": "0.0.0.0:9102", # used for metrics gathering
+}

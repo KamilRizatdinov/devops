@@ -1,0 +1,9 @@
+---
+# First we run docker role (since it is dependency for python_app)
+# which install docker and docker-compose when application deployment is started
+
+- hosts: 'default'
+  become: true
+  any_errors_fatal: true
+  roles:
+    - 'monitoring'

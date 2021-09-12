@@ -1,0 +1,15 @@
+server:
+  http_listen_port: 9080
+  log_level: "debug"
+
+client:
+  url: http://loki:3100/api/prom/push
+
+scrape_configs:
+- job_name: gathering
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: varlogs
+      __path__: /var/log/python_app.log

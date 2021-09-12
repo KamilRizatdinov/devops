@@ -1,0 +1,39 @@
+version: '3'
+
+networks:
+  loki:
+
+services:
+  python_app:
+    image: {{ python_app_docker_image }}:{{ python_app_docker_tag }}
+    ports:
+      - "{{ python_app_local_port }}:8000"
+    volumes:
+      - {{ python_app_logsdir }}:{{ python_app_logsdir }}
+    restart: always
+
+  loki:
+    image: grafana/loki:2.3.0
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki
+
+  promtail:
+    image: grafana/promtail:2.3.0
+    ports:
+      - "9080:9080"
+    volumes:
+      - {{ python_app_logsdir }}:{{ python_app_logsdir }}
+      - {{ promtail_configdir }}:{{ promtail_configdir }}
+    command: -config.file=/etc/promtail/promtail.yaml
+    networks:
+      - loki
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - loki
