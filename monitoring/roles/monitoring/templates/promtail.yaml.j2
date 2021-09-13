@@ -12,4 +12,4 @@ scrape_configs:
       - localhost
     labels:
       job: varlogs
-      __path__: /var/log/python_app.log
+      __path__: {{ python_app_logsfile }}

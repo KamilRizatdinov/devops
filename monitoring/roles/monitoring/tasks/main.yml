@@ -12,10 +12,22 @@
     state: directory
     mode: '0755'
 
-- name: Copy config file to virtual machine
+- name: Create prometheus configuration folder
+  file:
+    path: "{{ prometheus_configdir }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy promtail config file to virtual machine
   template:
     src: promtail.yaml.j2
     dest: "{{ promtail_configdir }}/promtail.yaml"
+    mode: '0755'
+
+- name: Copy prometheus config file to virtual machine
+  template:
+    src: prometheus.yaml.j2
+    dest: "{{ prometheus_configdir }}/prometheus.yml"
     mode: '0755'
 
 - name: Copy docker-compose file to virtual machine

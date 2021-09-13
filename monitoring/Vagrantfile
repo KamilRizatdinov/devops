@@ -19,10 +19,12 @@ VM_CPUS = 2
 HOST_PORT_APP = 8001
 HOST_PORT_GRAPHANA = 3001
 HOST_PORT_PROMTAIL = 9081
+HOST_PORT_PROMETHEUS = 9091
 
 GUEST_PORT_APP = 8000
 GUEST_PORT_GRAPHANA = 3000
 GUEST_PORT_PROMTAIL = 9080
+GUEST_PORT_PROMETHEUS = 9090
 
 Vagrant.require_version ">= 1.8.0"
 
@@ -34,6 +36,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: GUEST_PORT_APP, host: HOST_PORT_APP
   config.vm.network "forwarded_port", guest: GUEST_PORT_GRAPHANA, host: HOST_PORT_GRAPHANA
   config.vm.network "forwarded_port", guest: GUEST_PORT_PROMTAIL, host: HOST_PORT_PROMTAIL
+  config.vm.network "forwarded_port", guest: GUEST_PORT_PROMETHEUS, host: HOST_PORT_PROMETHEUS
 
   config.vm.provider "virtualbox" do |v|
           v.memory = VM_MEMORY

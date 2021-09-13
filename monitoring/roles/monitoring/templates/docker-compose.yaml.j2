@@ -3,6 +3,22 @@ version: '3'
 networks:
   loki:
 
+x-logging-config:
+  &logging-config
+  driver: json-file
+  options:
+    max-size: '10m'
+    max-file: '10'
+
+x-service-config:
+  &service-config
+  logging: *logging-config
+  restart: unless-stopped
+  cpus: 1
+  mem_limit: 512M
+  networks:
+    - loki
+
 services:
   python_app:
     image: {{ python_app_docker_image }}:{{ python_app_docker_tag }}
@@ -17,8 +33,7 @@ services:
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
-    networks:
-      - loki
+    <<: *service-config
 
   promtail:
     image: grafana/promtail:2.3.0
@@ -28,12 +43,18 @@ services:
       - {{ python_app_logsdir }}:{{ python_app_logsdir }}
       - {{ promtail_configdir }}:{{ promtail_configdir }}
     command: -config.file=/etc/promtail/promtail.yaml
-    networks:
-      - loki
+    <<: *service-config
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - {{ prometheus_configdir }}:{{ prometheus_configdir }}
+    <<: *service-config
 
   grafana:
     image: grafana/grafana:latest
     ports:
       - "3000:3000"
-    networks:
-      - loki
+    <<: *service-config

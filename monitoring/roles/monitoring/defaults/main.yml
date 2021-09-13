@@ -2,7 +2,9 @@
 # Workdir
 python_app_workdir: /opt/python_app
 promtail_configdir: /etc/promtail
+prometheus_configdir: /etc/prometheus
 python_app_logsdir: /var/log/
+python_app_logsfile: /var/log/python_app.log
 
 # Docker container specific variables
 python_app_docker_image: rizatdinov/python_app
