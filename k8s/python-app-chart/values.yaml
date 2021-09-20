@@ -1,0 +1,43 @@
+# Default values for python-app-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 3
+
+image:
+  repository: rizatdinov/python_app
+  pullPolicy: IfNotPresent
+  tag: "gh-actions-18896b58c687855b737d3ca3349e29e6224a27c4"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: LoadBalancer
+  port: 8000
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
