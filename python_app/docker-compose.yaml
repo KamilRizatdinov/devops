@@ -4,5 +4,10 @@ version: '3'
 services:
   python_app:
     image: rizatdinov/python_app:gh-actions-317ca9e71bcd1dafc3ad75d45a9eb4d299d44903
+    volumes:
+      - logs:/app/logs
     ports:
       - "8000:8000"
+
+volumes:
+  logs:
