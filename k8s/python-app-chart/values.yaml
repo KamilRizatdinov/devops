@@ -9,6 +9,10 @@ image:
   pullPolicy: IfNotPresent
   tag: "gh-actions-18896b58c687855b737d3ca3349e29e6224a27c4"
 
+configmap:
+  config:
+    name: my-configmap
+
 secrets:
   config:
     name: test-secret
