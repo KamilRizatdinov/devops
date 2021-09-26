@@ -66,7 +66,7 @@ To get a local copy up and running follow these simple example steps.
 
 2. Run the Web application container
     ```sh
-    docker run -p <local port number>:8000 -d rizatdinov/devops_python_app
+    docker run -p <local port number>:8000 -v logs:/app/logs -d rizatdinov/python_app:<tag you want>
     ```
 
 ## Testing
