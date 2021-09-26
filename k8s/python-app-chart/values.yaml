@@ -9,6 +9,11 @@ image:
   pullPolicy: IfNotPresent
   tag: "gh-actions-18896b58c687855b737d3ca3349e29e6224a27c4"
 
+secrets:
+  config:
+    name: test-secret
+  lab: eleven
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -23,13 +28,13 @@ service:
   type: LoadBalancer
   port: 8000
 
-resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 150m
+    memory: 128Mi
 
 autoscaling:
   enabled: false

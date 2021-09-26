@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.secrets.config.name }}
+  labels:
+    app: app
+    chart: '{{ .Chart.Name }}-{{ .Chart.Version }}'
+type: Opaque
+data:
+  lab: {{ .Values.secrets.lab | b64enc | quote }}
