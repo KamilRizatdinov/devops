@@ -61,10 +61,25 @@ spec:
               subPath: config.json
             - name: visits
               mountPath: /app/logs
+            - name: downloads
+              mountPath: /app/downloads
+      initContainers:
+        - name: installDeps
+          image: busybox
+          command:
+            - wget
+            - "-O"
+            - "/downloads/index.html"
+            - http://info.cern.ch
+          volumeMounts:
+            - name: downloads
+              mountPath: "/downloads"
       volumes:
         - name: config-volume
           configMap:
             name: {{ .Values.configmap.config.name }}
+        - name: downloads
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
