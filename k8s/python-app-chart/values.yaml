@@ -7,7 +7,7 @@ replicaCount: 3
 image:
   repository: rizatdinov/python_app
   pullPolicy: IfNotPresent
-  tag: "gh-actions-18896b58c687855b737d3ca3349e29e6224a27c4"
+  tag: "gh-actions-1fb1c0e0bab31de41e9efad049d60bffc93813a8"
 
 configmap:
   config:
@@ -29,8 +29,18 @@ podSecurityContext: {}
 securityContext: {}
 
 service:
+  name: python-app-service
   type: LoadBalancer
   port: 8000
+
+statefulSet:
+  podManagementPolicy: "Parallel"
+  volumeClaimTemplates:
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 128M
 
 resources:
   limits:
